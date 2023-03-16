@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import uea.pagamentos_api.ResumoLancamentoDto;
 import uea.pagamentos_api.models.Lancamento;
+import uea.pagamentos_api.repositories.filters.LancamentoFilter;
 import uea.pagamentos_api.services.LancamentoService;
 
 @RestController
@@ -26,6 +28,9 @@ public class LancamentoResource {
 
 	@Autowired
 	private LancamentoService lancamentoService;
+	
+	
+	
 
 	@PostMapping
 	public ResponseEntity<Lancamento> criar(@Valid @RequestBody Lancamento lancamento) {
@@ -38,9 +43,9 @@ public class LancamentoResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Lancamento>> listar() {
-		List<Lancamento> lancamentos = lancamentoService.listar();
-		return ResponseEntity.ok().body(lancamentos);
+	public ResponseEntity<List<ResumoLancamentoDto>> resumir(LancamentoFilter lancamentoFilter) {
+		List<ResumoLancamentoDto> resumos = lancamentoService.resumir(lancamentoFilter);
+		return ResponseEntity.ok().body(resumos);
 	}
 
 	@GetMapping(value = "/{codigo}")
