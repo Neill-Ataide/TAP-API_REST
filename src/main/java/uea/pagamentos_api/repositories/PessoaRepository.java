@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import uea.pagamentos_api.models.Pessoa;
 
 @Repository
-public interface PessoaRepository  extends JpaRepository<Pessoa, Long> {
+public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
 }

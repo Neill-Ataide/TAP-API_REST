@@ -1,61 +1,26 @@
 package uea.pagamentos_api.models;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import uea.pagamentos_api.enums.TipoLancamento;
 
-@Entity
-public class Lancamento implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
-	@NotBlank(message = "Descrição é obrigatório")
+public class Lancamento {
+	private Long codigo; 
 	private String descricao;
-	@NotNull(message = "Data vencimento é obrigatório")
 	private LocalDate dataVencimento;
 	private LocalDate dataPagamento;
-	@NotNull(message = "Valor é obrigatório")
 	private BigDecimal valor;
 	private String observacao;
+	private TipoLancamento tipoLancamento;
 	
-	@Enumerated(EnumType.STRING)
-	@NotNull(message = "Tipo é obrigatório")
-	private TipoLancamento tipo;
-	
-	@NotNull(message = "Categoria é obrigatório")
-	@ManyToOne
-	@JoinColumn(name="codigo_categoria")
-	private Categoria categoria;
-
-	@JsonIgnoreProperties({"endereco","ativo"})
-	@NotNull(message = "Pessoa é obrigatório")
-	@ManyToOne
-	@JoinColumn(name="codigo_pessoa")
-	private Pessoa pessoa;
-
 	public Lancamento() {
-		super();
+		
 	}
-
+	
 	public Lancamento(Long codigo, String descricao, LocalDate dataVencimento, LocalDate dataPagamento,
-			BigDecimal valor, String observacao, TipoLancamento tipo, Categoria categoria, Pessoa pessoa) {
+			BigDecimal valor, String observacao, TipoLancamento tipoLancamento) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
@@ -63,9 +28,7 @@ public class Lancamento implements Serializable {
 		this.dataPagamento = dataPagamento;
 		this.valor = valor;
 		this.observacao = observacao;
-		this.tipo = tipo;
-		this.categoria = categoria;
-		this.pessoa = pessoa;
+		this.tipoLancamento = tipoLancamento;
 	}
 
 	public Long getCodigo() {
@@ -116,28 +79,12 @@ public class Lancamento implements Serializable {
 		this.observacao = observacao;
 	}
 
-	public TipoLancamento getTipo() {
-		return tipo;
+	public TipoLancamento getTipoLancamento() {
+		return tipoLancamento;
 	}
 
-	public void setTipo(TipoLancamento tipo) {
-		this.tipo = tipo;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setTipoLancamento(TipoLancamento tipoLancamento) {
+		this.tipoLancamento = tipoLancamento;
 	}
 
 	@Override
@@ -156,5 +103,5 @@ public class Lancamento implements Serializable {
 		Lancamento other = (Lancamento) obj;
 		return Objects.equals(codigo, other.codigo);
 	}
-
+	
 }

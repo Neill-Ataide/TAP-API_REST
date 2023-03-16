@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import uea.pagamentos_api.models.Lancamento;
 
 @Repository
-public interface LancamentoRepository  extends JpaRepository<Lancamento, Long> {
+public interface LancamentoRepository extends JpaRepository<Lancamento, Long>{
 
 }
