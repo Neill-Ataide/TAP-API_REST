@@ -3,6 +3,9 @@ package uea.pagamentos_api.models;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,15 +15,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "categoria")
 public class Categoria implements Serializable {
-
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+
+	@NotBlank(message = "Nome é obrigatório")
+	@Size(min = 3, max = 20, message = "Nome deve ter" + " tamnho entre 3 e 20")
 	private String nome;
 
 	public Categoria() {
-
+		super();
 	}
 
 	public Categoria(Long codigo, String nome) {

@@ -3,6 +3,8 @@ package uea.pagamentos_api.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,54 +23,49 @@ import uea.pagamentos_api.services.CategoriaService;
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
-
+	
 	@Autowired
 	private CategoriaService categoriaService;
-
+	
 	@PostMapping
-	public ResponseEntity<Categoria> criar(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria) {
 		Categoria categoriaSalva = categoriaService.criar(categoria);
 		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}").
+		URI uri = ServletUriComponentsBuilder.
+				fromCurrentRequest().path("/{codigo}").
 				buildAndExpand(categoriaSalva.getCodigo()).toUri();
+		
 		return ResponseEntity.created(uri).body(categoriaSalva);
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> listar(){
+	public ResponseEntity<List<Categoria>> listar() {
 		List<Categoria> categorias = categoriaService.listar();
 		return ResponseEntity.ok().body(categorias);
 	}
 	
 	@GetMapping(value = "/{codigo}")
-	public ResponseEntity<Categoria> buscarPorCodigo(@PathVariable Long codigo){
+	public ResponseEntity<Categoria> buscarPorCodigo(@PathVariable 
+			Long codigo){
 		Categoria categoria = categoriaService.buscarPorCodigo(codigo);
 		return ResponseEntity.ok().body(categoria);
 	}
 	
-	@DeleteMapping(value = "/{codigo}")
+	@DeleteMapping(value="/{codigo}")
 	public ResponseEntity<Void> excluir(@PathVariable Long codigo){
 		categoriaService.excluir(codigo);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value = "/{codigo}")
-	public ResponseEntity<Categoria> atualizar(@PathVariable Long codigo, @RequestBody Categoria categoria){
-		Categoria categoriaSalva = categoriaService.atualizar(codigo, categoria);
+	@PutMapping(value="/{codigo}")
+	public ResponseEntity<Categoria> atualizar(@PathVariable Long codigo,
+			@Valid @RequestBody Categoria categoria){
+		Categoria categoriaSalva = categoriaService.atualizar(codigo,
+				categoria);
 		return ResponseEntity.ok().body(categoriaSalva);
+		
 	}
 	
+	
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

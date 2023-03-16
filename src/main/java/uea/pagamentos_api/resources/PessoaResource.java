@@ -3,6 +3,8 @@ package uea.pagamentos_api.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,49 +28,44 @@ public class PessoaResource {
 	private PessoaService pessoaService;
 
 	@PostMapping
-	public ResponseEntity<Pessoa> criar(@RequestBody Pessoa pessoa) {
+	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa) {
 		Pessoa pessoaSalva = pessoaService.criar(pessoa);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}").
-				buildAndExpand(pessoaSalva.getCodigo()).toUri();
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
+				.buildAndExpand(pessoaSalva.getCodigo()).toUri();
+
 		return ResponseEntity.created(uri).body(pessoaSalva);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<List<Pessoa>> listar(){
+	public ResponseEntity<List<Pessoa>> listar() {
 		List<Pessoa> pessoas = pessoaService.listar();
 		return ResponseEntity.ok().body(pessoas);
 	}
-	
+
 	@GetMapping(value = "/{codigo}")
-	public ResponseEntity<Pessoa> buscarPorCodigo(@PathVariable Long codigo){
+	public ResponseEntity<Pessoa> buscarPorCodigo(@PathVariable Long codigo) {
 		Pessoa pessoa = pessoaService.buscarPorCodigo(codigo);
 		return ResponseEntity.ok().body(pessoa);
 	}
-	
+
 	@DeleteMapping(value = "/{codigo}")
-	public ResponseEntity<Void> excluir(@PathVariable Long codigo){
+	public ResponseEntity<Void> excluir(@PathVariable Long codigo) {
 		pessoaService.excluir(codigo);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value = "/{codigo}")
-	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @RequestBody Pessoa pessoa){
-		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
-		return ResponseEntity.ok().body(pessoaSalva);
+	@PutMapping(value = "{codigo}/ativo")
+	public ResponseEntity<Pessoa> atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo){
+		Pessoa pessoaSalva = pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
+		return ResponseEntity.ok(pessoaSalva);
 	}
 	
+	@PutMapping(value = "/{codigo}")
+	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
+		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
+		return ResponseEntity.ok().body(pessoaSalva);
+
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

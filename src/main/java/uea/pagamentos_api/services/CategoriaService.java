@@ -11,9 +11,10 @@ import uea.pagamentos_api.repositories.CategoriaRepository;
 
 @Service
 public class CategoriaService {
+	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-
+	
 	public Categoria criar(Categoria categoria) {
 		return categoriaRepository.save(categoria);
 	}
@@ -23,7 +24,7 @@ public class CategoriaService {
 	}
 	
 	public Categoria buscarPorCodigo(Long codigo) {
-		Categoria categoria = categoriaRepository.findById(codigo).orElseThrow(); 
+		Categoria categoria = categoriaRepository.findById(codigo).orElseThrow();
 		return categoria;
 	}
 	
@@ -32,8 +33,11 @@ public class CategoriaService {
 	}
 	
 	public Categoria atualizar(Long codigo, Categoria categoria) {
-		Categoria categoriaSalva = categoriaRepository.findById(codigo).orElseThrow();
+		Categoria categoriaSalva = categoriaRepository.
+				findById(codigo).orElseThrow();
 		BeanUtils.copyProperties(categoria, categoriaSalva, "codigo");
 		return categoriaRepository.save(categoriaSalva);
 	}
+	
+
 }

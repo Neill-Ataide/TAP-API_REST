@@ -4,31 +4,18 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
-//class para personalizar o erro
-
 public class StandardError implements Serializable {
-	// transitar pela rede
-
 	private static final long serialVersionUID = 1L;
 
-	// personalizar mensagem
-
-	// mostra o horario do erro
 	private Instant timestamp;
-
-	// o status do erro
 	private Integer status;
-
-	// retornando a lista dos erros que podem estar acontecendo
 	private List<String> erros;
-
-	// mensagem
 	private String message;
-
-	// path que aconteceu o erro
 	private String path;
 
 	public StandardError() {
+		super();
+
 	}
 
 	public StandardError(Instant timestamp, Integer status, List<String> erros, String message, String path) {
