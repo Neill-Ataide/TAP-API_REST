@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import uea.pagamentos_api.ResumoLancamentoDto;
+import uea.pagamentos_api.dto.ResumoLancamentoDto;
 import uea.pagamentos_api.models.Lancamento;
 import uea.pagamentos_api.repositories.filters.LancamentoFilter;
 import uea.pagamentos_api.services.LancamentoService;

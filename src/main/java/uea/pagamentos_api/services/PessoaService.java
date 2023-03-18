@@ -6,7 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uea.pagamentos_api.ResumoPessoaDto;
+import uea.pagamentos_api.dto.ResumoPessoaDto;
 import uea.pagamentos_api.models.Endereco;
 import uea.pagamentos_api.models.Pessoa;
 import uea.pagamentos_api.repositories.PessoaRepository;

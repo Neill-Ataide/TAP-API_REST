@@ -5,7 +5,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uea.pagamentos_api.ResumoLancamentoDto;
+import uea.pagamentos_api.dto.ResumoLancamentoDto;
 import uea.pagamentos_api.models.Categoria;
 import uea.pagamentos_api.models.Lancamento;
 import uea.pagamentos_api.models.Pessoa;

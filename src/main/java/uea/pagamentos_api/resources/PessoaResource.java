@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import uea.pagamentos_api.ResumoPessoaDto;
+import uea.pagamentos_api.dto.ResumoPessoaDto;
 import uea.pagamentos_api.models.Endereco;
 import uea.pagamentos_api.models.Pessoa;
 import uea.pagamentos_api.repositories.filters.PessoaFilter;

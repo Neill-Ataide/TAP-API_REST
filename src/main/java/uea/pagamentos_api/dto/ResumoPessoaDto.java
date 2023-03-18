@@ -1,4 +1,4 @@
-package uea.pagamentos_api;
+package uea.pagamentos_api.dto;
 
 public class ResumoPessoaDto {
 	private String nome;

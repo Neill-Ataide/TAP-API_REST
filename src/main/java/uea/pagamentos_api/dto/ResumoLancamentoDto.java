@@ -1,4 +1,4 @@
-package uea.pagamentos_api;
+package uea.pagamentos_api.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

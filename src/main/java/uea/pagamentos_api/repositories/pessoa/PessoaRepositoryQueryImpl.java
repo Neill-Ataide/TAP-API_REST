@@ -11,7 +11,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import uea.pagamentos_api.ResumoPessoaDto;
+import uea.pagamentos_api.dto.ResumoPessoaDto;
 import uea.pagamentos_api.models.Pessoa;
 import uea.pagamentos_api.repositories.filters.PessoaFilter;
 
